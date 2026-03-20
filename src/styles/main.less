@@ -11,6 +11,7 @@
  */
 @import './variables.less';
 @import './themes.less';
+@import './layout.less';
 @import '../components/components.less';
 
 /* ==================== 基础重置 ==================== */
@@ -109,7 +110,7 @@ body {
 /* ==================== 主内容区 ==================== */
 #main {
   display: grid;
-  grid-template-columns: 1fr 300px;
+  grid-template-columns: 1fr 320px;
   gap: @spacing-lg;
   padding: 0 @spacing-lg;
   flex: 1;
@@ -143,10 +144,25 @@ body {
   gap: @spacing-lg;
 
   .sidebar-widget {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: @radius-lg;
+    padding: @spacing-lg;
+    transition: @transition;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
     /* 小组件标题 */
     .widget-title {
-      font-size: 1.1rem;
-      font-weight: 600;
+      font-size: 1.15rem;
+      font-weight: 700;
       color: @primary-color;
       margin-bottom: @spacing-md;
       padding-bottom: @spacing-md;
@@ -162,9 +178,10 @@ body {
 
     /* 用户名 */
     .profile-name {
-      font-weight: 600;
+      font-weight: 700;
       text-align: center;
       margin-bottom: @spacing-sm;
+      font-size: 1.1rem;
     }
 
     /* 用户描述 */
@@ -172,6 +189,7 @@ body {
       text-align: center;
       font-size: 0.9rem;
       opacity: 0.7;
+      line-height: 1.6;
     }
 
     /* 列表样式 */
@@ -180,28 +198,39 @@ body {
 
       li {
         padding: @spacing-sm 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: @transition;
 
         &:last-child {
           border-bottom: none;
         }
 
         a {
-          color: @primary-color;
+          color: @text-color;
           text-decoration: none;
           transition: @transition;
           display: flex;
           justify-content: space-between;
           align-items: center;
+          padding: @spacing-xs 0;
 
           &:hover {
-            color: @accent-color;
+            color: @primary-color;
             transform: translateX(4px);
           }
 
           span {
             opacity: 0.6;
             font-size: 0.9rem;
+            background: rgba(100, 181, 246, 0.2);
+            padding: 2px 6px;
+            border-radius: @radius-sm;
+            transition: @transition;
+          }
+
+          &:hover span {
+            background: rgba(100, 181, 246, 0.4);
+            opacity: 1;
           }
         }
       }
@@ -221,6 +250,20 @@ body {
   display: grid;
   grid-template-columns: 80px 1fr;
   gap: @spacing-lg;
+  padding: @spacing-lg;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: @radius-lg;
+  transition: @transition;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
 
   /* 文章日期 */
   .post-date {
@@ -233,23 +276,31 @@ body {
     padding: @spacing-md;
     color: white;
     font-weight: 600;
+    min-height: 80px;
 
     .day {
       font-size: 1.8rem;
+      line-height: 1;
     }
 
     .month {
       font-size: 0.8rem;
       opacity: 0.9;
+      margin-top: @spacing-xs;
     }
   }
 
   /* 文章内容 */
   .post-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     /* 文章标题 */
     .post-title {
       font-size: 1.3rem;
       margin-bottom: @spacing-md;
+      line-height: 1.4;
 
       a {
         color: @text-color;
@@ -265,8 +316,9 @@ body {
     /* 文章摘要 */
     .post-summary {
       margin-bottom: @spacing-md;
-      opacity: 0.8;
+      opacity: 0.85;
       line-height: 1.8;
+      font-size: 0.95rem;
     }
 
     /* 文章元数据 */
@@ -274,12 +326,20 @@ body {
       display: flex;
       gap: @spacing-md;
       font-size: 0.9rem;
-      opacity: 0.6;
+      opacity: 0.7;
+      flex-wrap: wrap;
+      align-items: center;
 
       span {
         display: inline-flex;
         align-items: center;
         gap: @spacing-xs;
+        transition: @transition;
+
+        &:hover {
+          opacity: 1;
+          color: @primary-color;
+        }
       }
 
       /* 分类标签 */
@@ -289,6 +349,12 @@ body {
         padding: @spacing-xs @spacing-sm;
         border-radius: @radius-sm;
         opacity: 1;
+        font-weight: 500;
+        transition: @transition;
+
+        &:hover {
+          background: @accent-color;
+        }
       }
     }
   }
@@ -372,21 +438,68 @@ body {
 }
 
 /* ==================== 响应式设计 ==================== */
+@media (max-width: 1024px) {
+  #main {
+    grid-template-columns: 1fr 280px;
+    gap: @spacing-md;
+    padding: 0 @spacing-md;
+  }
+
+  .post-item {
+    gap: @spacing-md;
+    padding: @spacing-md;
+  }
+
+  .site-title {
+    font-size: 2.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   #main {
     grid-template-columns: 1fr;
+    gap: @spacing-md;
+    padding: 0 @spacing-sm;
   }
 
   #sidebar {
     order: -1;
+    gap: @spacing-md;
   }
 
   .post-item {
     grid-template-columns: 1fr;
+    gap: @spacing-md;
+    padding: @spacing-md;
 
     .post-date {
       flex-direction: row;
       gap: @spacing-md;
+      min-height: auto;
+      padding: @spacing-sm @spacing-md;
+
+      .day {
+        font-size: 1.5rem;
+      }
+
+      .month {
+        margin-top: 0;
+      }
+    }
+
+    .post-content {
+      .post-title {
+        font-size: 1.1rem;
+      }
+
+      .post-summary {
+        font-size: 0.9rem;
+      }
+
+      .post-meta {
+        gap: @spacing-sm;
+        font-size: 0.85rem;
+      }
     }
   }
 
@@ -398,11 +511,38 @@ body {
     }
   }
 
+  .site-subtitle {
+    font-size: 1rem;
+  }
+
+  #header {
+    padding: @spacing-lg 0;
+    margin-bottom: @spacing-lg;
+  }
+
+  #mainContent {
+    gap: @spacing-md;
+  }
+
   .theme-toggle {
     bottom: @spacing-md;
     right: @spacing-md;
     width: 45px;
     height: 45px;
     font-size: 1.2rem;
+  }
+
+  #footer {
+    padding: @spacing-lg @spacing-md;
+    margin-top: @spacing-lg;
+
+    p {
+      font-size: 0.9rem;
+    }
+
+    .footer-stars {
+      font-size: 1rem;
+      letter-spacing: @spacing-sm;
+    }
   }
 }
