@@ -1,0 +1,48 @@
+{
+  // 基础信息
+  info: {
+    name: '',
+    startDate: '2021-01-01',
+    avatar: '',
+  },
+
+  // 动画配置
+  animate: {
+    // 星空背景配置
+    starfield: {
+      enabled: true,
+      starCount: 200,
+      speed: 0.5,
+      colors: ['#ffffff', '#e0e6ff', '#ffd4e5'],
+    },
+    // 光标效果配置
+    cursor: {
+      enabled: true,
+      size: 12,
+      sizeF: 4,
+      color: '#64b5f6',
+      colorF: '#ffffff',
+    },
+  },
+
+  // 主题配置
+  theme: {
+    mode: 'auto', // 'light', 'dark', 'auto'
+    colors: {
+      primary: '#64b5f6',
+      secondary: '#ffd4e5',
+    },
+  },
+
+  // 页面配置
+  pages: {
+    home: {
+      enabled: true,
+      banner: true,
+    },
+    article: {
+      enabled: true,
+      toc: true,
+    },
+  },
+}

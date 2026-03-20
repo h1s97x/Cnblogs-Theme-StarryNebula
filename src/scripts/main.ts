@@ -2,16 +2,20 @@
  * Main - 主控制脚本
  * 
  * 功能：
+ * - 加载配置系统
  * - 初始化星空背景
- * - 初始化鼠标轨迹效果
+ * - 初始化光标效果
  * - 主题切换
  * - 页面加载动画
  * 
  * 这是项目的入口文件，负责协调所有模块的初始化
  */
 import '../styles/main.less'
+import '../styles/cursor.less'
 import { Starfield } from './starfield'
-import { MouseTrail } from './mouse-trail'
+import { Cursor } from './cursor'
+import { loadConfig, Config } from '../utils/config'
+import { detectPageType } from '../utils/pageDetector'
 
 /** 博客园配置接口 */
 interface CnblogsConfig {
@@ -29,13 +33,30 @@ declare global {
   }
 }
 
+/** 全局配置对象 */
+let globalConfig: Config
+
 /**
  * 初始化所有模块
  * 在DOM加载完成后调用
  */
 function init(): void {
-  initStarfield()
-  initMouseTrail()
+  // 加载配置
+  globalConfig = loadConfig()
+
+  // 检测页面类型
+  const pageType = detectPageType()
+  console.log(`[StarryNebula] Page type: ${pageType}`)
+
+  // 初始化各个模块
+  if (globalConfig.animate.starfield.enabled) {
+    initStarfield()
+  }
+
+  if (globalConfig.animate.cursor.enabled) {
+    initCursor()
+  }
+
   initThemeToggle()
 }
 
@@ -46,26 +67,28 @@ function init(): void {
 function initStarfield(): void {
   const canvas = document.getElementById('starfield') as HTMLCanvasElement
   if (canvas) {
+    const config = globalConfig.animate.starfield
     new Starfield(canvas, {
-      starCount: 200,
-      speed: 0.5,
-      colors: ['#ffffff', '#e0e6ff', '#ffd4e5']
+      starCount: config.starCount,
+      speed: config.speed,
+      colors: config.colors
     })
   }
 }
 
 /**
- * 初始化鼠标轨迹效果
- * 创建MouseTrail实例并初始化
+ * 初始化光标效果
+ * 创建Cursor实例并初始化
  */
-function initMouseTrail(): void {
-  const trail = new MouseTrail({
-    particleCount: 8,
-    particleSize: 4,
-    particleColor: '#64b5f6',
-    duration: 800
+function initCursor(): void {
+  const config = globalConfig.animate.cursor
+  const cursor = new Cursor({
+    size: config.size,
+    sizeF: config.sizeF,
+    color: config.color,
+    colorF: config.colorF
   })
-  trail.init()
+  cursor.init()
 }
 
 /**
