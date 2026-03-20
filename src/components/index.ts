@@ -11,5 +11,7 @@ export { Sidebar, SidebarConfig, SidebarWidget } from './Sidebar'
 export { TOC, TOCConfig, TOCItem } from './TOC'
 export { Search, SearchConfig, SearchResult } from './Search'
 export { Pagination, PaginationConfig } from './Pagination'
+export { Comment, CommentConfig, CommentItem } from './Comment'
+export { Share, ShareConfig, SharePlatform } from './Share'
 
 
