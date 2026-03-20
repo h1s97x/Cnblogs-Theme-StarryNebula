@@ -16,6 +16,7 @@ import { Starfield } from './starfield'
 import { Cursor } from './cursor'
 import { loadConfig, Config } from '../utils/config'
 import { detectPageType } from '../utils/pageDetector'
+import { executeHook } from '../hooks/lifecycle'
 
 /** 博客园配置接口 */
 interface CnblogsConfig {
@@ -41,12 +42,18 @@ let globalConfig: Config
  * 在DOM加载完成后调用
  */
 function init(): void {
+  // 执行加载前钩子
+  executeHook('beforeLoad')
+
   // 加载配置
   globalConfig = loadConfig()
 
   // 检测页面类型
   const pageType = detectPageType()
   console.log(`[StarryNebula] Page type: ${pageType}`)
+
+  // 执行渲染前钩子
+  executeHook('beforeRender')
 
   // 初始化各个模块
   if (globalConfig.animate.starfield.enabled) {
@@ -58,6 +65,12 @@ function init(): void {
   }
 
   initThemeToggle()
+
+  // 执行渲染后钩子
+  executeHook('afterRender')
+
+  // 执行加载后钩子
+  executeHook('afterLoad')
 }
 
 /**
