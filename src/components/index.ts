@@ -8,4 +8,7 @@ export { BaseComponent, ComponentConfig, ComponentLifecycle } from './BaseCompon
 export { ComponentRegistry, ComponentInfo, globalRegistry } from './ComponentRegistry'
 export { Banner, BannerConfig } from './Banner'
 export { Sidebar, SidebarConfig, SidebarWidget } from './Sidebar'
+export { TOC, TOCConfig, TOCItem } from './TOC'
+export { Search, SearchConfig, SearchResult } from './Search'
+
 
