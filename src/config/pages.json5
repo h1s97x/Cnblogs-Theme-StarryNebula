@@ -1,0 +1,143 @@
+{
+  // 首页配置
+  home: {
+    enabled: true,
+    banner: {
+      enabled: true,
+      title: 'Welcome to My Blog',
+      subtitle: 'Share thoughts and ideas',
+      height: 300,
+    },
+    sidebar: {
+      enabled: true,
+      position: 'right',
+      width: 300,
+    },
+    starfield: {
+      enabled: true,
+      starCount: 200,
+    },
+    cursor: {
+      enabled: true,
+    },
+  },
+
+  // 文章页配置
+  article: {
+    enabled: true,
+    banner: {
+      enabled: false,
+    },
+    sidebar: {
+      enabled: true,
+      position: 'right',
+      width: 280,
+    },
+    starfield: {
+      enabled: true,
+      starCount: 150,
+    },
+    cursor: {
+      enabled: true,
+    },
+    toc: {
+      enabled: true,
+      position: 'right',
+    },
+  },
+
+  // 分类页配置
+  category: {
+    enabled: true,
+    banner: {
+      enabled: true,
+      title: 'Category',
+      height: 200,
+    },
+    sidebar: {
+      enabled: true,
+    },
+    starfield: {
+      enabled: true,
+    },
+    cursor: {
+      enabled: true,
+    },
+  },
+
+  // 标签页配置
+  tag: {
+    enabled: true,
+    banner: {
+      enabled: true,
+      title: 'Tags',
+      height: 200,
+    },
+    sidebar: {
+      enabled: true,
+    },
+    starfield: {
+      enabled: true,
+    },
+    cursor: {
+      enabled: true,
+    },
+  },
+
+  // 归档页配置
+  archive: {
+    enabled: true,
+    banner: {
+      enabled: true,
+      title: 'Archive',
+      height: 200,
+    },
+    sidebar: {
+      enabled: true,
+    },
+    starfield: {
+      enabled: true,
+    },
+    cursor: {
+      enabled: true,
+    },
+  },
+
+  // 搜索页配置
+  search: {
+    enabled: true,
+    banner: {
+      enabled: true,
+      title: 'Search Results',
+      height: 200,
+    },
+    sidebar: {
+      enabled: true,
+    },
+    starfield: {
+      enabled: true,
+    },
+    cursor: {
+      enabled: true,
+    },
+  },
+
+  // 用户页配置
+  user: {
+    enabled: true,
+    banner: {
+      enabled: true,
+      title: 'User Profile',
+      height: 250,
+    },
+    sidebar: {
+      enabled: true,
+    },
+    starfield: {
+      enabled: true,
+    },
+    cursor: {
+      enabled: true,
+    },
+  },
+}

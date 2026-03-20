@@ -58,3 +58,6 @@ logs/
 .vite
 *.tsbuildinfo
 sm/*
+RESEARCH_REPORT.md
+UPGRADE_PLAN.md
+docs/PERFORMANCE.md
