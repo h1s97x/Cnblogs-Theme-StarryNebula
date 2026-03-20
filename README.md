@@ -36,6 +36,10 @@ npm run build
 
 详见 [install.md](./docs/INSTALL.md)
 
+### 配置选项
+
+详见 [CONFIGURATION.md](./docs/CONFIGURATION.md)
+
 ## 项目结构
 
 ```
