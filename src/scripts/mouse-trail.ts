@@ -55,10 +55,16 @@ export class MouseTrail {
   private particles: Particle[] = []
   /** 配置对象 */
   private config: Required<MouseTrailConfig>
-  /** 粒子容器DOM元素 */
-  private container: HTMLElement | null = null
+  /** Canvas元素 */
+  private canvas: HTMLCanvasElement | null = null
+  /** Canvas上下文 */
+  private ctx: CanvasRenderingContext2D | null = null
   /** 动画帧ID */
   private animationId: number | null = null
+  /** 上次创建粒子的时间（用于节流） */
+  private lastParticleTime: number = 0
+  /** 粒子创建间隔（毫秒） */
+  private particleInterval: number = 16
 
   /**
    * 构造函数
@@ -75,41 +81,60 @@ export class MouseTrail {
 
   /**
    * 初始化鼠标轨迹系统
-   * - 创建粒子容器
+   * - 创建Canvas容器
    * - 绑定鼠标移动事件
    * - 启动动画循环
    */
   public init(): void {
-    this.createContainer()
+    this.createCanvas()
     this.bindEvents()
     this.animate()
   }
 
   /**
-   * 创建粒子容器DOM元素
+   * 创建Canvas元素用于绘制粒子
    * 设置为fixed定位，覆盖整个视口
    */
-  private createContainer(): void {
-    this.container = document.createElement('div')
-    this.container.id = 'mouse-trail-container'
-    this.container.style.cssText = `
+  private createCanvas(): void {
+    this.canvas = document.createElement('canvas')
+    this.canvas.id = 'mouse-trail-canvas'
+    this.canvas.style.cssText = `
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
       pointer-events: none;
       z-index: 9999;
     `
-    document.body.appendChild(this.container)
+    this.resizeCanvas()
+    document.body.appendChild(this.canvas)
+    this.ctx = this.canvas.getContext('2d')
+
+    // 监听窗口大小变化
+    window.addEventListener('resize', () => this.resizeCanvas())
+  }
+
+  /**
+   * 调整Canvas大小以适应窗口
+   */
+  private resizeCanvas(): void {
+    if (!this.canvas) return
+    this.canvas.width = window.innerWidth
+    this.canvas.height = window.innerHeight
   }
 
   /**
    * 绑定鼠标移动事件
-   * 监听mousemove事件并生成粒子
+   * 使用节流防止过于频繁的粒子创建
    */
   private bindEvents(): void {
-    document.addEventListener('mousemove', (e) => this.createParticles(e.clientX, e.clientY))
+    document.addEventListener('mousemove', (e) => {
+      const now = Date.now()
+      // 节流：每16ms最多创建一次粒子
+      if (now - this.lastParticleTime > this.particleInterval) {
+        this.createParticles(e.clientX, e.clientY)
+        this.lastParticleTime = now
+      }
+    })
   }
 
   /**
@@ -138,12 +163,21 @@ export class MouseTrail {
 
   /**
    * 动画循环
+   * - 清空Canvas
    * - 更新粒子位置和生命值
    * - 应用重力效果
-   * - 绘制粒子
+   * - 使用Canvas绘制粒子
    * - 移除已死亡的粒子
    */
   private animate = (): void => {
+    if (!this.ctx || !this.canvas) {
+      this.animationId = requestAnimationFrame(this.animate)
+      return
+    }
+
+    // 清空Canvas
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
     // 过滤掉已死亡的粒子
     this.particles = this.particles.filter(p => p.life > 0)
 
@@ -159,23 +193,17 @@ export class MouseTrail {
 
       // 计算透明度（生命值比例）
       const opacity = p.life / p.maxLife
-      
-      // 创建粒子DOM元素
-      const el = document.createElement('div')
-      el.style.cssText = `
-        position: fixed;
-        left: ${p.x}px;
-        top: ${p.y}px;
-        width: ${p.size}px;
-        height: ${p.size}px;
-        background: ${this.config.particleColor};
-        border-radius: 50%;
-        opacity: ${opacity};
-        pointer-events: none;
-        transform: translate(-50%, -50%);
-      `
-      this.container?.appendChild(el)
+
+      // 使用Canvas绘制粒子
+      this.ctx!.fillStyle = this.config.particleColor
+      this.ctx!.globalAlpha = opacity
+      this.ctx!.beginPath()
+      this.ctx!.arc(p.x, p.y, p.size / 2, 0, Math.PI * 2)
+      this.ctx!.fill()
     })
+
+    // 重置透明度
+    this.ctx.globalAlpha = 1
 
     // 继续动画循环
     this.animationId = requestAnimationFrame(this.animate)
@@ -183,12 +211,12 @@ export class MouseTrail {
 
   /**
    * 销毁鼠标轨迹系统
-   * 停止动画循环并移除容器
+   * 停止动画循环并移除Canvas
    */
   public destroy(): void {
     if (this.animationId) {
       cancelAnimationFrame(this.animationId)
     }
-    this.container?.remove()
+    this.canvas?.remove()
   }
 }
