@@ -3,6 +3,7 @@
  * 
  * 功能：
  * - 加载配置系统
+ * - 初始化主题管理器
  * - 初始化星空背景
  * - 初始化光标效果
  * - 主题切换
@@ -17,6 +18,7 @@ import { Cursor } from './cursor'
 import { loadConfig, Config } from '../utils/config'
 import { detectPageType } from '../utils/pageDetector'
 import { executeHook } from '../hooks/lifecycle'
+import { ThemeManager } from '../themes/ThemeManager'
 
 /** 博客园配置接口 */
 interface CnblogsConfig {
@@ -25,17 +27,23 @@ interface CnblogsConfig {
     startDate?: string
     avatar?: string
   }
+  theme?: {
+    id?: string
+    mode?: 'light' | 'dark' | 'auto'
+  }
 }
 
 /** 扩展全局Window接口 */
 declare global {
   interface Window {
     cnblogsConfig?: CnblogsConfig
+    themeManager?: ThemeManager
   }
 }
 
 /** 全局配置对象 */
 let globalConfig: Config
+let themeManager: ThemeManager
 
 /**
  * 初始化所有模块
@@ -47,6 +55,11 @@ function init(): void {
 
   // 加载配置
   globalConfig = loadConfig()
+
+  // 初始化主题管理器
+  const themeConfig = (window as any).cnblogsConfig?.theme || {}
+  themeManager = new ThemeManager(themeConfig.id || 'light', themeConfig.mode || 'auto')
+  window.themeManager = themeManager
 
   // 检测页面类型
   const pageType = detectPageType()
@@ -114,29 +127,24 @@ function initThemeToggle(): void {
   const toggle = document.getElementById('themeToggle') as HTMLButtonElement
   if (!toggle) return
 
-  // 从本地存储读取主题设置
-  const isDark = localStorage.getItem('theme') === 'dark'
-  updateThemeIcon(isDark)
-  if (isDark) {
-    document.documentElement.classList.add('dark-theme')
-  }
-
   // 绑定切换事件
   toggle.addEventListener('click', () => {
-    const isDarkNow = document.documentElement.classList.toggle('dark-theme')
-    localStorage.setItem('theme', isDarkNow ? 'dark' : 'light')
-    updateThemeIcon(isDarkNow)
+    themeManager.toggleTheme()
+    updateThemeIcon()
   })
+
+  // 初始化图标
+  updateThemeIcon()
 }
 
 /**
  * 更新主题图标
- * @param isLight - 是否为亮色主题
  */
-function updateThemeIcon(isLight: boolean): void {
+function updateThemeIcon(): void {
   const icon = document.querySelector('.theme-icon') as HTMLElement
   if (icon) {
-    icon.textContent = isLight ? '☀️' : '🌙'
+    const mode = themeManager.getEffectiveMode()
+    icon.textContent = mode === 'dark' ? '☀️' : '🌙'
   }
 }
 

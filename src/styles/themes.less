@@ -1,0 +1,160 @@
+/**
+ * Themes - 主题样式
+ * 
+ * 定义所有主题的 CSS 变量和样式
+ */
+
+// 默认 CSS 变量
+:root {
+  // 颜色
+  --theme-primary: #64b5f6;
+  --theme-secondary: #ffd4e5;
+  --theme-accent: #ff6b9d;
+  --theme-background: #ffffff;
+  --theme-text: #333333;
+  --theme-border: #e0e0e0;
+
+  // 字体
+  --theme-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --theme-font-size: 14px;
+  --theme-font-weight: 400;
+  --theme-line-height: 1.6;
+
+  // 动画
+  --theme-animation-duration: 300ms;
+  --theme-animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// 亮色主题
+html.theme-light {
+  --theme-primary: #64b5f6;
+  --theme-secondary: #ffd4e5;
+  --theme-accent: #ff6b9d;
+  --theme-background: #ffffff;
+  --theme-text: #333333;
+  --theme-border: #e0e0e0;
+
+  color-scheme: light;
+}
+
+// 暗色主题
+html.theme-dark {
+  --theme-primary: #64b5f6;
+  --theme-secondary: #ffd4e5;
+  --theme-accent: #ff6b9d;
+  --theme-background: #1a1a1a;
+  --theme-text: #e0e0e0;
+  --theme-border: #333333;
+
+  color-scheme: dark;
+}
+
+// 应用主题变量
+body {
+  background-color: var(--theme-background);
+  color: var(--theme-text);
+  font-family: var(--theme-font-family);
+  font-size: var(--theme-font-size);
+  font-weight: var(--theme-font-weight);
+  line-height: var(--theme-line-height);
+  transition: background-color var(--theme-animation-duration) var(--theme-animation-easing),
+    color var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+// 链接颜色
+a {
+  color: var(--theme-primary);
+  transition: color var(--theme-animation-duration) var(--theme-animation-easing);
+
+  &:hover {
+    color: var(--theme-accent);
+  }
+}
+
+// 边框颜色
+input,
+textarea,
+select {
+  border-color: var(--theme-border);
+  background-color: var(--theme-background);
+  color: var(--theme-text);
+  transition: border-color var(--theme-animation-duration) var(--theme-animation-easing),
+    background-color var(--theme-animation-duration) var(--theme-animation-easing),
+    color var(--theme-animation-duration) var(--theme-animation-easing);
+
+  &:focus {
+    border-color: var(--theme-primary);
+  }
+}
+
+// 按钮样式
+button {
+  background-color: var(--theme-primary);
+  color: var(--theme-background);
+  border: none;
+  transition: background-color var(--theme-animation-duration) var(--theme-animation-easing);
+
+  &:hover {
+    background-color: var(--theme-accent);
+  }
+}
+
+// 代码块
+code,
+pre {
+  background-color: var(--theme-border);
+  color: var(--theme-text);
+  transition: background-color var(--theme-animation-duration) var(--theme-animation-easing),
+    color var(--theme-animation-duration) var(--theme-animation-easing);
+}
+
+// 引用块
+blockquote {
+  border-left-color: var(--theme-primary);
+  color: var(--theme-text);
+}
+
+// 表格
+table {
+  border-color: var(--theme-border);
+
+  th,
+  td {
+    border-color: var(--theme-border);
+  }
+
+  th {
+    background-color: var(--theme-border);
+    color: var(--theme-text);
+  }
+}
+
+// 滚动条
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--theme-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-primary);
+  border-radius: 4px;
+
+  &:hover {
+    background: var(--theme-accent);
+  }
+}
+
+// 选中文本
+::selection {
+  background-color: var(--theme-primary);
+  color: var(--theme-background);
+}
+
+::-moz-selection {
+  background-color: var(--theme-primary);
+  color: var(--theme-background);
+}
