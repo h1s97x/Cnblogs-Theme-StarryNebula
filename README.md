@@ -6,12 +6,14 @@
 
 * ✨ 动态星空背景（Canvas）
 * 🎨 玻璃态设计（Glassmorphism）
-* ✦ 鼠标轨迹粒子效果
-* 🌙 深色/浅色主题切换
+* 🖱️ GSAP 光标效果
+* 🌙 5 个预设主题 + 主题系统
 * 📱 完全响应式设计
 * ⚡ 高性能动画
 * 🔧 TypeScript 类型安全
 * 🎯 Less 变量管理
+* 🧩 组件化架构
+* 📄 完整的页面适配
 
 ## 快速开始
 
@@ -39,6 +41,14 @@ npm run build
 ### 配置选项
 
 详见 [CONFIGURATION.md](./docs/CONFIGURATION.md)
+
+### 主题系统
+
+详见 [THEMES.md](./docs/THEMES.md)
+
+### 组件系统
+
+详见 [COMPONENTS.md](./docs/COMPONENTS.md)
 
 ## 项目结构
 
