@@ -7,3 +7,5 @@
 export { Initializer, InitializerConfig, createInitializer, getInitializer, globalInitializer } from './Initializer'
 export { EventBus, EventHandler, EventListener, globalEventBus } from './EventBus'
 export { PluginSystem, Plugin } from './PluginSystem'
+export { Store, StoreState, StoreOptions, createStore, getStore, globalStore } from './Store'
+
