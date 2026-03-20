@@ -10,5 +10,6 @@ export { Banner, BannerConfig } from './Banner'
 export { Sidebar, SidebarConfig, SidebarWidget } from './Sidebar'
 export { TOC, TOCConfig, TOCItem } from './TOC'
 export { Search, SearchConfig, SearchResult } from './Search'
+export { Pagination, PaginationConfig } from './Pagination'
 
 
