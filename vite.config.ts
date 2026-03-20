@@ -10,7 +10,7 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        assetFileNames: 'starrynebula.css'
+        assetFileNames: 'starrynebula.css',
       }
     },
     // 压缩配置
@@ -28,5 +28,7 @@ export default defineConfig({
     cssCodeSplit: false,
     sourcemap: false,
     reportCompressedSize: true,
+    // 分割大小警告
+    chunkSizeWarningLimit: 500,
   }
 })
