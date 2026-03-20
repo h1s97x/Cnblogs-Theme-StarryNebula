@@ -1,0 +1,125 @@
+/**
+ * Components - 组件样式
+ * 
+ * 所有组件的样式定义
+ */
+
+/* ==================== Banner 组件 ==================== */
+.banner-component {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  color: var(--theme-background);
+  padding: 40px 20px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+
+  .banner-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .banner-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* ==================== Sidebar 组件 ==================== */
+.sidebar-component {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .sidebar-widget {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all var(--theme-animation-duration) var(--theme-animation-easing);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .widget-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--theme-primary);
+      margin: 0 0 15px 0;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--theme-primary);
+    }
+
+    .widget-content {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--theme-text);
+
+      ul,
+      ol {
+        margin: 0;
+        padding-left: 20px;
+
+        li {
+          margin-bottom: 8px;
+
+          a {
+            color: var(--theme-primary);
+            text-decoration: none;
+            transition: color var(--theme-animation-duration) var(--theme-animation-easing);
+
+            &:hover {
+              color: var(--theme-accent);
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+  .banner-component {
+    .banner-title {
+      font-size: 1.8rem;
+    }
+
+    .banner-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  .sidebar-component {
+    gap: 15px;
+
+    .sidebar-widget {
+      padding: 15px;
+
+      .widget-title {
+        font-size: 1rem;
+      }
+
+      .widget-content {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

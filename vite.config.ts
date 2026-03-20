@@ -12,6 +12,21 @@ export default defineConfig({
       output: {
         assetFileNames: 'starrynebula.css'
       }
-    }
+    },
+    // 压缩配置
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+      format: {
+        comments: false,
+      }
+    },
+    // 其他优化
+    cssCodeSplit: false,
+    sourcemap: false,
+    reportCompressedSize: true,
   }
 })
