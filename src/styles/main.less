@@ -1,0 +1,406 @@
+/**
+ * StarryNebula - 主样式文件
+ * 
+ * 功能：
+ * - 玻璃态卡片效果
+ * - 暗色/亮色主题支持
+ * - 博客园页面布局适配
+ * - 流畅的动画过渡
+ * 
+ * 导入变量定义文件
+ */
+@import './variables.less';
+
+/* ==================== 基础重置 ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #0a0a1e 0%, #1a1a3e 100%);
+  color: @text-color;
+  line-height: 1.6;
+  overflow-x: hidden;
+
+  /* 暗色主题样式 */
+  &.dark-theme {
+    background: linear-gradient(135deg, #0a0a1e 0%, #1a1a3e 100%);
+    color: @dark-text;
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: @dark-text;
+    }
+
+    .post-title a {
+      color: @primary-color;
+    }
+
+    .widget-title {
+      color: @primary-color;
+    }
+  }
+}
+
+/* ==================== Canvas背景 ==================== */
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* ==================== 主容器 ==================== */
+#home {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==================== 头部 ==================== */
+#header {
+  padding: @spacing-xl 0;
+  text-align: center;
+  margin-bottom: @spacing-xl;
+
+  .header-content {
+    animation: slideDown 0.8s ease-out;
+  }
+
+  /* 网站标题 */
+  .site-title {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, @primary-color, @accent-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: @spacing-md;
+
+    /* 星星图标 */
+    .star-icon {
+      margin: 0 @spacing-md;
+      animation: twinkle 2s ease-in-out infinite;
+    }
+  }
+
+  /* 网站副标题 */
+  .site-subtitle {
+    font-size: 1.2rem;
+    color: @primary-color;
+    opacity: 0.8;
+  }
+}
+
+/* ==================== 主内容区 ==================== */
+#main {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: @spacing-lg;
+  padding: 0 @spacing-lg;
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ==================== 玻璃态卡片 ==================== */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: @radius-lg;
+  padding: @spacing-lg;
+  transition: @transition;
+  box-shadow: @shadow-md;
+
+  /* 悬停效果 */
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+}
+
+/* ==================== 侧边栏 ==================== */
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: @spacing-lg;
+
+  .sidebar-widget {
+    /* 小组件标题 */
+    .widget-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: @primary-color;
+      margin-bottom: @spacing-md;
+      padding-bottom: @spacing-md;
+      border-bottom: 2px solid @primary-color;
+    }
+
+    /* 头像 */
+    .profile-avatar {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: @spacing-md;
+    }
+
+    /* 用户名 */
+    .profile-name {
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: @spacing-sm;
+    }
+
+    /* 用户描述 */
+    .profile-desc {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* 列表样式 */
+    ul {
+      list-style: none;
+
+      li {
+        padding: @spacing-sm 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        a {
+          color: @primary-color;
+          text-decoration: none;
+          transition: @transition;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          &:hover {
+            color: @accent-color;
+            transform: translateX(4px);
+          }
+
+          span {
+            opacity: 0.6;
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ==================== 主内容区 ==================== */
+#mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: @spacing-lg;
+}
+
+/* ==================== 文章项 ==================== */
+.post-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: @spacing-lg;
+
+  /* 文章日期 */
+  .post-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, @primary-color, @secondary-color);
+    border-radius: @radius-md;
+    padding: @spacing-md;
+    color: white;
+    font-weight: 600;
+
+    .day {
+      font-size: 1.8rem;
+    }
+
+    .month {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+  }
+
+  /* 文章内容 */
+  .post-content {
+    /* 文章标题 */
+    .post-title {
+      font-size: 1.3rem;
+      margin-bottom: @spacing-md;
+
+      a {
+        color: @text-color;
+        text-decoration: none;
+        transition: @transition;
+
+        &:hover {
+          color: @primary-color;
+        }
+      }
+    }
+
+    /* 文章摘要 */
+    .post-summary {
+      margin-bottom: @spacing-md;
+      opacity: 0.8;
+      line-height: 1.8;
+    }
+
+    /* 文章元数据 */
+    .post-meta {
+      display: flex;
+      gap: @spacing-md;
+      font-size: 0.9rem;
+      opacity: 0.6;
+
+      span {
+        display: inline-flex;
+        align-items: center;
+        gap: @spacing-xs;
+      }
+
+      /* 分类标签 */
+      .post-category {
+        background: @primary-color;
+        color: white;
+        padding: @spacing-xs @spacing-sm;
+        border-radius: @radius-sm;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+/* ==================== 页脚 ==================== */
+#footer {
+  text-align: center;
+  padding: @spacing-xl;
+  margin-top: @spacing-xl;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0.7;
+
+  p {
+    margin-bottom: @spacing-sm;
+
+    a {
+      color: @primary-color;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .footer-stars {
+    font-size: 1.2rem;
+    letter-spacing: @spacing-md;
+  }
+}
+
+/* ==================== 主题切换按钮 ==================== */
+.theme-toggle {
+  position: fixed;
+  bottom: @spacing-lg;
+  right: @spacing-lg;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: @primary-color;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: @shadow-lg;
+  transition: @transition;
+  z-index: 1000;
+
+  &:hover {
+    transform: scale(1.1) rotate(20deg);
+    background: @accent-color;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* ==================== 动画定义 ==================== */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+  #main {
+    grid-template-columns: 1fr;
+  }
+
+  #sidebar {
+    order: -1;
+  }
+
+  .post-item {
+    grid-template-columns: 1fr;
+
+    .post-date {
+      flex-direction: row;
+      gap: @spacing-md;
+    }
+  }
+
+  .site-title {
+    font-size: 2rem;
+
+    .star-icon {
+      margin: 0 @spacing-sm;
+    }
+  }
+
+  .theme-toggle {
+    bottom: @spacing-md;
+    right: @spacing-md;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+}

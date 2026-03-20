@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StarryNebula - 博客园星空主题">
+    <title>StarryNebula - 博客园星空主题</title>
+</head>
+<body>
+    <!-- 星空背景Canvas -->
+    <canvas id="starfield"></canvas>
+    
+    <!-- 博客园页面结构模拟 -->
+    <div id="home">
+        <!-- 头部区域 -->
+        <header id="header">
+            <div class="header-content">
+                <h1 class="site-title">
+                    <span class="star-icon">✦</span>
+                    StarryNebula
+                    <span class="star-icon">✦</span>
+                </h1>
+                <p class="site-subtitle">仰望星空，脚踏实地</p>
+            </div>
+        </header>
+
+        <!-- 主要内容区 -->
+        <div id="main">
+            <!-- 侧边栏 -->
+            <aside id="sidebar">
+                <div class="sidebar-widget glass-card">
+                    <h3 class="widget-title">博主信息</h3>
+                    <div class="profile-avatar">👤</div>
+                    <p class="profile-name">星空旅人</p>
+                    <p class="profile-desc">代码与诗歌，皆是星辰</p>
+                </div>
+                
+                <div class="sidebar-widget glass-card">
+                    <h3 class="widget-title">随笔分类</h3>
+                    <ul class="category-list">
+                        <li><a href="#">前端开发 <span>(12)</span></a></li>
+                        <li><a href="#">JavaScript <span>(8)</span></a></li>
+                        <li><a href="#">CSS艺术 <span>(6)</span></a></li>
+                        <li><a href="#">Canvas动画 <span>(4)</span></a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-widget glass-card">
+                    <h3 class="widget-title">友情链接</h3>
+                    <ul class="link-list">
+                        <li><a href="#">博客园首页</a></li>
+                        <li><a href="#">我的GitHub</a></li>
+                        <li><a href="#">联系我</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- 主内容区 -->
+            <main id="mainContent">
+                <!-- 文章列表 -->
+                <article class="post-item glass-card">
+                    <div class="post-date">
+                        <span class="day">20</span>
+                        <span class="month">2026-03</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">
+                            <a href="#">Canvas星空背景实现：三层视差与流星效果</a>
+                        </h2>
+                        <div class="post-summary">
+                            <p>本文介绍如何使用Canvas API创建动态星空背景，包括三层视差星星、闪烁动画、流星效果以及鼠标交互的实现细节...</p>
+                        </div>
+                        <div class="post-meta">
+                            <span class="post-category">前端开发</span>
+                            <span class="post-views">阅读(128)</span>
+                            <span class="post-comments">评论(5)</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-item glass-card">
+                    <div class="post-date">
+                        <span class="day">18</span>
+                        <span class="month">2026-03</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">
+                            <a href="#">CSS玻璃态设计：backdrop-filter的魔法</a>
+                        </h2>
+                        <div class="post-summary">
+                            <p>探索CSS的backdrop-filter属性，创建现代化的玻璃态UI效果，让你的界面在保持透明感的同时，提升视觉层次...</p>
+                        </div>
+                        <div class="post-meta">
+                            <span class="post-category">CSS艺术</span>
+                            <span class="post-views">阅读(96)</span>
+                            <span class="post-comments">评论(3)</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-item glass-card">
+                    <div class="post-date">
+                        <span class="day">15</span>
+                        <span class="month">2026-03</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">
+                            <a href="#">鼠标轨迹粒子效果：打造灵动的交互体验</a>
+                        </h2>
+                        <div class="post-summary">
+                            <p>使用JavaScript实现鼠标跟随的星光粒子效果，通过DOM操作和CSS动画，创建轻盈优雅的视觉反馈...</p>
+                        </div>
+                        <div class="post-meta">
+                            <span class="post-category">JavaScript</span>
+                            <span class="post-views">阅读(85)</span>
+                            <span class="post-comments">评论(7)</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-item glass-card">
+                    <div class="post-date">
+                        <span class="day">12</span>
+                        <span class="month">2026-03</span>
+                    </div>
+                    <div class="post-content">
+                        <h2 class="post-title">
+                            <a href="#">requestAnimationFrame：高性能动画的秘密</a>
+                        </h2>
+                        <div class="post-summary">
+                            <p>深入了解浏览器重绘机制，使用requestAnimationFrame优化动画性能，创建流畅的60fps体验...</p>
+                        </div>
+                        <div class="post-meta">
+                            <span class="post-category">前端开发</span>
+                            <span class="post-views">阅读(72)</span>
+                            <span class="post-comments">评论(2)</span>
+                        </div>
+                    </div>
+                </article>
+            </main>
+        </div>
+
+        <!-- 页脚 -->
+        <footer id="footer">
+            <p>Powered by <a href="https://www.cnblogs.com" target="_blank">博客园</a> | StarryNebula Theme</p>
+            <p class="footer-stars">✦ ✧ ✦ ✧ ✦</p>
+        </footer>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button id="themeToggle" class="theme-toggle" title="切换主题">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+</body>
+</html>
