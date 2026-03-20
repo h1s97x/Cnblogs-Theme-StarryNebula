@@ -50,6 +50,14 @@ npm run build
 
 详见 [COMPONENTS.md](./docs/COMPONENTS.md)
 
+### 使用示例
+
+详见 [USAGE_EXAMPLE.md](./docs/USAGE_EXAMPLE.md)
+
+### API 参考
+
+详见 [API_REFERENCE.md](./docs/API_REFERENCE.md)
+
 ## 项目结构
 
 ```
